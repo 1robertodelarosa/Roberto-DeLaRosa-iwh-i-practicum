@@ -13,16 +13,15 @@ app.use(express.json());
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 app.get('/', async (req, res) => {
-    const contacts = 'https://api.hubapi.com/crm/v3/objects/2-21825197';
+    const animals = 'https://api.hubapi.com/crm/v3/objects/2-21825197?properties=animal_name%2Canimal_type%2Caverage_weight%2Caverage_length';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     }
     try {
-        const resp = await axios.get(contacts, { headers });
+        const resp = await axios.get(animals, { headers });
         const data = resp.data.results;
-        res.json(data)
-        // res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
+        res.render('homepage', { title: 'Home', data });      
     } catch (error) {
         console.error(error);
     }
@@ -49,22 +48,24 @@ app.get('/update-cobj', async (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 app.post('/update-cobj', async (req, res) => {
-    const update = {
+    const newProps = {
         properties: {
-            "favorite_book": req.body.newVal
+            "animal_name": req.body.newAnimalName,
+            "animal_type": req.body.newAnimalType,
+            "average_weight": req.body.newAnimalWeight,
+            "average_length": req.body.newAnimalLength,
         }
     }
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
+    const createAnimal = `https://api.hubapi.com/crm/v3/objects/2-21825197`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     };
 
     try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
+        await axios.post(createAnimal, newProps, { headers } );
+        res.redirect('/');
     } catch(err) {
         console.error(err);
     }

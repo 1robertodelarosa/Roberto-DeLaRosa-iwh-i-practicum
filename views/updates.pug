@@ -5,14 +5,9 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
-        h1 Contacts
-        .cards 
-            each animal in data
-                .card 
-                    h2.card__name Animal: #{animal.properties.animal_name}
-                    p.card__email Type: #{animal.properties.animal_type}
-                    p.card__email Avg Weight: #{animal.properties.average_weight} 
-                    p.card__email Avg Length: #{animal.properties.average_length}
+        h1 Animals
+
+        a(href='/') Return to the homepage
 
         .form-wrapper
             form(method="POST")
@@ -26,5 +21,3 @@ html
                 input(type="text" name="newAnimalLength" required)
                 input(type="submit" value="Submit")
 
-
-    a(href='/') Return to the homepage

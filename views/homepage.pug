@@ -1,0 +1,18 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Animals
+
+        a(href='/update-cobj') Add to this table
+
+        .cards 
+            each animal in data
+                .card 
+                    h2.card__name Animal: #{animal.properties.animal_name}
+                    p.card__email Type: #{animal.properties.animal_type}
+                    p.card__email Avg Weight: #{animal.properties.average_weight} 
+                    p.card__email Avg Length: #{animal.properties.average_length}
