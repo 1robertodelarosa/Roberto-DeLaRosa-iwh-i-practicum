@@ -5,14 +5,22 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
-        h1 Animals
+        h1 Custom Object Table
 
         a(href='/update-cobj') Add to this table
 
-        .cards 
+        center
+        table(style='width:100%', border='1')
+            thead
+                tr
+                th Animal Name
+                th Type
+                th Avg Weight
+                th Avg Length
+            tbody
             each animal in data
-                .card 
-                    h2.card__name Animal: #{animal.properties.animal_name}
-                    p.card__email Type: #{animal.properties.animal_type}
-                    p.card__email Avg Weight: #{animal.properties.average_weight} 
-                    p.card__email Avg Length: #{animal.properties.average_length}
+                tr
+                    td #{animal.properties.animal_name}
+                    td #{animal.properties.animal_type}
+                    td #{animal.properties.average_weight}
+                    td #{animal.properties.average_length}
